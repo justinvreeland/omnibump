@@ -150,9 +150,6 @@ var (
 	// ErrVenvDowngrade is returned when a version downgrade is attempted.
 	ErrVenvDowngrade = errors.New("downgrade rejected")
 
-	// ErrVenvInvalidPinning is returned when venv mode requires == pinning.
-	ErrVenvInvalidPinning = errors.New("venv mode requires == pinning")
-
 	// ErrVenvEmptyVersion is returned when a version is empty.
 	ErrVenvEmptyVersion = errors.New("empty version for package")
 
