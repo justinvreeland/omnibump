@@ -50,6 +50,7 @@ type rootFlags struct {
 	update         bool
 	tool           string
 	venv           string
+	gemDir         string
 }
 
 var flags rootFlags
@@ -101,6 +102,7 @@ func New() *cobra.Command {
 	f.BoolVar(&flags.update, "update", false, "update all dependencies")
 	f.StringVar(&flags.tool, "tool", "", "build tool override (Python: uv, pip, poetry, hatch, pdm, setuptools)")
 	f.StringVar(&flags.venv, "venv", "", "path to staged Python venv for in-place bumping (Python only)")
+	f.StringVar(&flags.gemDir, "gem-dir", "", "path to Ruby gem directory for in-place overlay bumping (Ruby only)")
 
 	// Add version command
 	cmd.AddCommand(version.WithFont("starwars"))
@@ -427,6 +429,9 @@ func buildUpdateConfig(cfg *config.Config) *languages.UpdateConfig {
 	}
 	if flags.venv != "" {
 		updateCfg.Options["venv"] = flags.venv
+	}
+	if flags.gemDir != "" {
+		updateCfg.Options["gem-dir"] = flags.gemDir
 	}
 
 	return updateCfg
